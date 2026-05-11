@@ -1,0 +1,80 @@
+#include <iostream> 
+#define SIZE 10 
+ 
+int main() { 
+    printf("Tablice \n"); 
+    int numbers2[SIZE]; 
+    int numbers[SIZE]={1,55,3,40,-5,-132,7,23,37,10}; 
+    int mediana[SIZE]; 
+    // 
+    // for(int i=0; i<SIZE; i++){ 
+    //     printf("numbers[%d]=%d\n",i, numbers[i]); 
+    // 
+    // } 
+    // int maximum =numbers[0]; 
+    // for(int i=0; i<SIZE; i++){ 
+    //     if(maximum<numbers[i]) 
+    //     { 
+    //         maximum=numbers[i]; 
+    //     } 
+    // } 
+    // printf("max=%d\n",maximum); 
+    // 
+    // int min =numbers[0]; 
+    // for(int i=0; i<SIZE; i++){ 
+    //     if(min>numbers[i]) 
+    //     { 
+    //         min=numbers[i]; 
+    //     } 
+    // } 
+    // printf("min=%d\n",min); 
+    // 
+    // int sum=0; 
+    // for(int i=0; i<SIZE; i++) { 
+    //     sum+=numbers[i]; 
+    // } 
+    // float average = (float)sum/SIZE; 
+    // printf("average=%.2f\n",average); 
+ 
+    int a=0; 
+    for(int i=0; i<SIZE; i++) { 
+        printf("podaj %d liczbe tablicy",i); 
+        scanf_s("%d",&a); 
+        numbers2[i]=a; 
+ 
+    } 
+    for(int i=0; i<SIZE; i++){ 
+        printf("numbers2[%d]=%d\n",i, numbers2[i]); 
+    } 
+ 
+    for(int i=0;i<9;i++) { 
+        int temp; 
+        if(numbers[i]>numbers[i+1]) { 
+            temp=numbers[i+1]; 
+            numbers[i+1]=numbers[i]; 
+            numbers[i]=temp; 
+            i=-1; 
+        } 
+ 
+    } 
+    printf("posortowane liczby: "); 
+    for(int i=0;i<10;i++) 
+    { 
+        printf("%d, ",numbers[i]); 
+    } 
+ 
+    printf("\n"); 
+    printf("Wylicznie mediany\n"); 
+    float median=0; 
+    if (SIZE % 2 == 0) { 
+    median=(float)(numbers[SIZE/2]+numbers[SIZE/2-1])/2; 
+    printf("mediana=%f\n",median); 
+    } 
+    else { 
+        median=numbers[SIZE/2]; 
+        printf("mediana=%f\n",median); 
+    } 
+ 
+ 
+    return 0; 
+}
