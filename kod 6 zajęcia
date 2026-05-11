@@ -1,0 +1,174 @@
+#include <iostream> 
+#define SIZE 10 
+FILE * fptr; 
+void printArray(int array[], int size) { 
+    for (int i = 0; i < size; ++i) { 
+        printf("array[%d] = %d\n", i, array[i]); 
+    } 
+} 
+void EnterNumbers(int numbers[], int size) { 
+    int a=0; 
+    for(int i=0; i<size; i++) { 
+        printf("Enter %d value to array",i); 
+        scanf_s("%d",&a); 
+        numbers[i]=a; 
+    } 
+} 
+int FindMinimum(int numbers[], int size){ 
+    int min =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+       if(min>numbers[i]) 
+        { 
+            min=numbers[i]; 
+        } 
+    } 
+    return min; 
+} 
+ 
+int FindMaximum(int numbers[], int size){ 
+    int maximum =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+        if(maximum<numbers[i]) 
+        { 
+            maximum=numbers[i]; 
+        } 
+    } 
+    return maximum; 
+} 
+float calculateAverage(int numbers[], int size){ 
+    int sum=0; 
+    for(int i=0; i<size; i++) { 
+        sum+=numbers[i]; 
+    } 
+    float average = (float)sum/size; 
+    return average; 
+} 
+void menu(void) { 
+    printf("1. Enter the values into the array\n"); 
+    printf("2. Display the content of the array\n"); 
+    printf("3. Determine the minimum value\n"); 
+    printf("4. Determine the maximum value\n"); 
+    printf("5. Determine the average value\n"); 
+    printf("6. Save your array\n"); 
+    printf("7. Show your saved array\n"); 
+    printf("8. Choose snapshot to show\n"); 
+    printf("0. EXIT\n"); 
+    printf("Select an option:\n"); 
+} 
+ 
+int save(int numbers[], int size, int snumber) { 
+    fptr = fopen("plik.txt", "a"); 
+    if (fptr != 0) 
+    { 
+ 
+        fprintf(fptr,"Snapshot %d\n", snumber); 
+        for (int i=0; i<size; i++) 
+        { 
+            fprintf(fptr, "%d\n", numbers[i]); 
+        } 
+    } 
+    else 
+    { 
+        printf("\nBlad otwierania pliku!\n"); 
+    } 
+    fclose(fptr); 
+    return snumber; 
+} 
+void read(int numbers[], int size) { 
+    fptr = fopen("plik.txt", "r"); 
+    if (fptr != 0) 
+    { 
+        for (int i=0; i<size; i++) { 
+            while (!feof(fptr)) 
+            { 
+                numbers[i]=fgetc(fptr); 
+                printf("%c", numbers[i]); 
+            } 
+        } 
+    } 
+    else 
+    { 
+        printf("\nBlad otwierania pliku!\n"); 
+    } 
+    fclose(fptr); 
+} 
+void readS(int numbers[], int size, int C) { 
+    fptr = fopen("plik.txt", "r+"); 
+    C=0; 
+    scanf("%d", &C); 
+    if (fptr != 0) 
+    { 
+        fseek(fptr, C*10, SEEK_SET); 
+        for (int i=0; i<size+1; i++) { 
+            while (!feof(fptr)) 
+            { 
+                fseek(fptr, 0, SEEK_CUR); 
+                numbers[i]=fgetc(fptr); 
+                printf("%c", numbers[i]); 
+            } 
+        } 
+    } 
+    else 
+    { 
+        printf("\nBlad otwierania pliku!\n"); 
+    } 
+    fclose(fptr); 
+} 
+int main() { 
+    int array[SIZE] = {1, 2, 3, -4, 50, 6, 7, 8, 9, 10}; 
+    int option = 0; 
+    int c=1; 
+    printf("SIMPLE ARRAY\n\n"); 
+ 
+    do { 
+        menu(); 
+        scanf("%d", &option); 
+ 
+        switch (option) { 
+            case 0: 
+                break; 
+            case 1: 
+                printf("Entering values into the array\n\n"); 
+                EnterNumbers(array,SIZE); 
+                break; 
+            case 2: 
+                printArray(array, SIZE); 
+                break; 
+            case 3: 
+                printf("Determining the minimum value\n\n"); 
+                FindMinimum(array,SIZE); 
+                printf("Min=%d\n", FindMinimum(array,SIZE)); 
+                break; 
+            case 4: 
+                printf("Determining the maximum value\n\n"); 
+                FindMaximum(array,SIZE); 
+                printf("Max=%d\n", FindMaximum(array,SIZE)); 
+                break; 
+            case 5: 
+                printf("Determining the average value\n\n"); 
+                calculateAverage(array,SIZE); 
+                printf("average=%.2f\n",    calculateAverage(array,SIZE)); 
+                break; 
+            default: 
+                printf("Choose the right option...\n\n"); 
+            case 6: 
+                printf("Saving your array\n\n"); 
+                save(array,SIZE, c); 
+                c++; 
+                break; 
+            case 7: 
+                printf("Your saved array\n\n"); 
+                read(array,SIZE); 
+                break; 
+            case 8: 
+                printf("Choose snapshot to show\n\n"); 
+              readS(array,SIZE, option); 
+                break; 
+        } 
+    } while (option != 0); 
+    printf("THE END!\n"); 
+    return 0; 
+} 
+ 
+
+ 
