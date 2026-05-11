@@ -1,0 +1,116 @@
+#include <iostream> 
+#include <time.h> 
+ 
+void PrintArray(char numbers[], int size) { 
+    for(int i=0; i<size; i++){ 
+        printf("%c",numbers[i]); 
+    } 
+} 
+int generujMale(char tablica[], int znak,int aktualneMiejsce) { 
+    for (int i = 0; i < znak; i++) { 
+        tablica[aktualneMiejsce] = 'a' + rand() % 26; 
+        aktualneMiejsce++; 
+    } 
+    return aktualneMiejsce; 
+} 
+int generujduze(char tablica[], int znak,int aktualneMiejsce) { 
+    for (int i = 0; i < znak; i++) { 
+        tablica[aktualneMiejsce] = 'A' + rand() % 26; 
+        aktualneMiejsce++; 
+    } 
+    return aktualneMiejsce; 
+} 
+int generujznaki(char tablica[], int znak,int aktualneMiejsce) { 
+    for (int i = 0; i < znak; i++) { 
+        tablica[aktualneMiejsce] = '!' + rand() % 15; 
+        aktualneMiejsce++; 
+    } 
+    return aktualneMiejsce; 
+} 
+int generujLiczby(char tablica[], int znak,int aktualneMiejsce) { 
+    for (int i = 0; i < znak; i++) { 
+        tablica[aktualneMiejsce] = '0' + rand() % 10; 
+        aktualneMiejsce++; 
+    } 
+    return aktualneMiejsce; 
+} 
+//TASOWANIE (Algorytm Fishera-Yatesa) 
+void tasujTablice(char tablica[], int rozmiar) { 
+    for (int i = rozmiar - 1; i > 0; i--) { 
+        int wylosowaneMiejsce = rand() % (i + 1); 
+        char temp = tablica[i]; 
+        tablica[i] = tablica[wylosowaneMiejsce]; 
+        tablica[wylosowaneMiejsce] = temp; 
+    } 
+} 
+ 
+int main() { 
+    srand(time(NULL)); 
+int lowerLetter =0; 
+int upperLetter =0; 
+int sign =0; 
+int number =0; 
+ 
+ 
+    printf("Ile malych liter? \n"); 
+    scanf("%d",&lowerLetter); 
+    printf("Ile duzych liter?\n"); 
+    scanf("%d",&upperLetter); 
+    printf("Ile cyfr?\n"); 
+    scanf("%d",&number); 
+    printf("Ile znakw specjalnych?\n"); 
+    scanf("%d",&sign); 
+    int sum= lowerLetter+upperLetter+sign+number; 
+   char text[sum]; 
+//     for (int i = 0; i < sum; i++) { 
+//         text[i] = '\0'; 
+//     } 
+// for (int i=0; i<lowerLetter; i++){ 
+//     char losowa = 'a' + rand() % 26; 
+//     int pole; 
+//     do { 
+//         pole = rand() % sum; 
+//     } while (text[pole] != '\0'); 
+//     text[pole] = losowa; 
+// } 
+//     for (int i=0; i<upperLetter; i++){ 
+//         char losowa = 'A' + rand() % 26; 
+//         int pole; 
+//     do { 
+//         pole = rand() % sum; 
+//     } while (text[pole] != '\0'); 
+//     text[pole] = losowa; 
+//     } 
+//     for (int i=0; i<sign; i++){ 
+//         char losowa = '!' + rand() % 14; 
+//         int pole; 
+//     do { 
+//         pole = rand() % sum; 
+//     } while (text[pole] != '\0'); 
+//     text[pole] = losowa; 
+//     } 
+//     for (int i=0; i<number; i++){ 
+//         char losowa = '0' + rand() % 9; 
+//         int pole; 
+//     do { 
+//         pole = rand() % sum; 
+//     } while (text[pole] != '\0'); 
+//     text[pole] = losowa; 
+//     } 
+ 
+    int miejsce = 0; 
+    miejsce = generujMale(text, lowerLetter, miejsce); 
+    miejsce = generujduze(text, upperLetter, miejsce); 
+    miejsce = generujznaki(text, sign, miejsce); 
+    generujLiczby(text, number, miejsce); 
+    tasujTablice(text, sum); 
+    PrintArray(text,sum); 
+ 
+ 
+   return 0; 
+} 
+ 
+ 
+ 
+
+ 
