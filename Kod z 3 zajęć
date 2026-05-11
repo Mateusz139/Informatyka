@@ -1,0 +1,195 @@
+#include <iostream> 
+#define SIZE 10 
+ 
+void PrintArray(int numbers[], int size){ 
+    for(int i=0; i<size; i++){ 
+        printf("numbers[%d]=%d\n",i, numbers[i]); 
+    } 
+} 
+int FindMaximum(int numbers[], int size){ 
+    int maximum =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+        if(maximum<numbers[i]) 
+        { 
+            maximum=numbers[i]; 
+        } 
+    } 
+    return maximum; 
+} 
+int FindMinimum(int numbers[], int size){ 
+    int min =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+        if(min>numbers[i]) 
+        { 
+            min=numbers[i]; 
+        } 
+    } 
+    return min; 
+} 
+float calculateAverage(int numbers[], int size){ 
+    int sum=0; 
+    for(int i=0; i<size; i++) { 
+        sum+=numbers[i]; 
+    } 
+    float average = (float)sum/size; 
+    return average; 
+} 
+void EnterNumbers(int numbers[], int size){ 
+    int a=0; 
+    for(int i=0; i<size; i++) { 
+        printf("podaj %d liczbe tablicy",i); 
+        scanf_s("%d",&a); 
+        numbers[i]=a; 
+    } 
+} 
+void SortArray(int numbers[], int size){ 
+    for(int i=0;i<size-1;i++) { 
+        int temp; 
+        if(numbers[i]>numbers[i+1]) { 
+            temp=numbers[i+1]; 
+            numbers[i+1]=numbers[i]; 
+            numbers[i]=temp; 
+            i=-1; 
+        } 
+    } 
+} 
+float calculateMedian(int numbers[], int size){ 
+    float median=0; 
+    if (size % 2 == 0) { 
+        median=(float)(numbers[size/2]+numbers[size/2-1])/2; 
+    } 
+    else { 
+        median=numbers[size/2]; 
+    } 
+    return median; 
+} 
+ 
+int main() { 
+    printf("Tablice \n"); 
+    int numbers2[SIZE]; 
+    int numbers[SIZE]={1,55,3,40,-5,-132,7,23,37,10}; 
+ 
+    PrintArray(numbers,SIZE); 
+    printf("max=%d\n", FindMaximum(numbers,SIZE)); 
+    printf("min=%d\n", FindMinimum(numbers,SIZE)); 
+    printf("average=%.2f\n", calculateAverage(numbers,SIZE)); 
+    EnterNumbers(numbers2,SIZE); 
+    printf("Twoja tablica\n"); 
+    PrintArray(numbers2,SIZE); 
+    printf("\n"); 
+    SortArray(numbers,SIZE); 
+    printf("Posortowana Tablica\n"); 
+    PrintArray(numbers,SIZE); 
+    printf("\n"); 
+    printf("median=%.2f\n", calculateMedian(numbers,SIZE)); 
+ 
+    return 0; 
+} 
+ 
+
+ 
+
+ 
+
+#include <iostream> 
+#define SIZE 10 
+void printArray(int array[], int size) { 
+    for (int i = 0; i < size; ++i) { 
+        printf("array[%d] = %d\n", i, array[i]); 
+    } 
+} 
+void EnterNumbers(int numbers[], int size) { 
+    int a=0; 
+    for(int i=0; i<size; i++) { 
+        printf("Enter %d value to array",i); 
+        scanf_s("%d",&a); 
+        numbers[i]=a; 
+    } 
+} 
+int FindMinimum(int numbers[], int size){ 
+    int min =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+       if(min>numbers[i]) 
+        { 
+            min=numbers[i]; 
+        } 
+    } 
+    return min; 
+} 
+ 
+int FindMaximum(int numbers[], int size){ 
+    int maximum =numbers[0]; 
+    for(int i=0; i<size; i++){ 
+        if(maximum<numbers[i]) 
+        { 
+            maximum=numbers[i]; 
+        } 
+    } 
+    return maximum; 
+} 
+float calculateAverage(int numbers[], int size){ 
+    int sum=0; 
+    for(int i=0; i<size; i++) { 
+        sum+=numbers[i]; 
+    } 
+    float average = (float)sum/size; 
+    return average; 
+} 
+void menu(void) { 
+    printf("1. Enter the values into the array\n"); 
+    printf("2. Display the content of the array\n"); 
+    printf("3. Determine the minimum value\n"); 
+    printf("4. Determine the maximum value\n"); 
+    printf("5. Determine the average value\n"); 
+    printf("0. EXIT\n"); 
+    printf("Select an option:\n"); 
+} 
+int main() { 
+    int array[SIZE] = {1, 2, 3, -4, 50, 6, 7, 8, 9, 10}; 
+    int option = 0; 
+ 
+    printf("SIMPLE ARRAY\n\n"); 
+ 
+    do { 
+        menu(); 
+        scanf("%d", &option); 
+ 
+        switch (option) { 
+            case 0: 
+                break; 
+            case 1: 
+                printf("Entering values into the array\n\n"); 
+                EnterNumbers(array,SIZE); 
+                break; 
+            case 2: 
+                printArray(array, SIZE); 
+                break; 
+            case 3: 
+                printf("Determining the minimum value\n\n"); 
+                FindMinimum(array,SIZE); 
+                printf("Min=%d\n", FindMinimum(array,SIZE)); 
+                break; 
+            case 4: 
+                printf("Determining the maximum value\n\n"); 
+                FindMaximum(array,SIZE); 
+                printf("Max=%d\n", FindMaximum(array,SIZE)); 
+                break; 
+            case 5: 
+                printf("Determining the average value\n\n"); 
+                calculateAverage(array,SIZE); 
+                printf("average=%.2f\n", 	calculateAverage(array,SIZE)); 
+                break; 
+            default: 
+                printf("Choose the right option...\n\n"); 
+        } 
+    } while (option != 0); 
+    printf("THE END!\n"); 
+    return 0; 
+} 
+ 
+
+ 
+
+ 
+
+ 
