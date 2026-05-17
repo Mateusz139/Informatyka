@@ -1,0 +1,29 @@
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+    int lower, upper;
+    int quantity=1;
+    int *tab;
+    while(quantity!=0) {
+        printf("Input the lower range of the array:");
+        scanf("%i", &lower);
+        printf("Input the upper range of the array:");
+        scanf("%i", &upper);
+        printf("Input how many numbers you want to generate:");
+        scanf("%i", &quantity);
+
+        srand(time(NULL));
+        tab = (int *) realloc(NULL,quantity * sizeof(int));
+
+        for (int i = 0; i < quantity; i++) {
+            tab[i] = (rand() % (upper - lower + 1)) + lower;
+            printf("array[%i] = %i\n", i, tab[i]);
+        }
+    }
+    free(tab);
+    return(0);
+}
